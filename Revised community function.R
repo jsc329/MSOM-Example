@@ -1,4 +1,3 @@
-
 simCommEdit <- function(type=c("det/nondet", "counts"), nsite=30, nrep=3, nspec=100,
          mean.psi=0.25, sig.lpsi=1, mu.beta.lpsi=0, sig.beta.lpsi=0,
          mean.lambda=2, sig.loglam=1, mu.beta.loglam=1, sig.beta.loglam=1,
