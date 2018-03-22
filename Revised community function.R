@@ -183,35 +183,35 @@ simCommEdit <- function(type=c("det/nondet", "counts"), nsite=30, nrep=3, nspec=
       # (4) Observed detection frequencies
       # (5) Sites where a species was missed
       # (6) True and observed histogram of site-specific species richness
-      par(mfrow = c(2,2), cex.axis = 1.3, cex.lab = 1.3)
-      mapPalette1 <- colorRampPalette(c("white", "black"))
-      mapPalette2 <- colorRampPalette(c("white", "yellow", "orange", "red"))
+      #par(mfrow = c(2,2), cex.axis = 1.3, cex.lab = 1.3)
+      #mapPalette1 <- colorRampPalette(c("white", "black"))
+      #mapPalette2 <- colorRampPalette(c("white", "yellow", "orange", "red"))
       # (3) True presence/absence matrix (z) for all species
       # mapPalette was 2 before
-      image(x = 1:nspec, y = 1:nsite, z = t(z), col = mapPalette1(4), main =
-              paste("True presence/absence (z) matrix\n (finite-sample N species =",
-                    Ntotal.fs,")"), frame = TRUE, xlim = c(0, nspec+1),
-            ylim = c(0, nsite+1), xlab = "Species", ylab = "Sites")
+      #image(x = 1:nspec, y = 1:nsite, z = t(z), col = mapPalette1(4), main =
+       #       paste("True presence/absence (z) matrix\n (finite-sample N species =",
+        #            Ntotal.fs,")"), frame = TRUE, xlim = c(0, nspec+1),
+         #   ylim = c(0, nsite+1), xlab = "Species", ylab = "Sites")
       
       # (4) Observed detection frequency for all species
-      image(x = 1:nspec, y = 1:nsite, z = t(y.sum.all), col = mapPalette2(100),
-            main = paste("Observed detection frequencies"),
-            xlim = c(0, nspec+1), ylim = c(0, nsite+1),
-            frame = TRUE, xlab = "Species", ylab = "Sites")
+      #image(x = 1:nspec, y = 1:nsite, z = t(y.sum.all), col = mapPalette2(100),
+       #     main = paste("Observed detection frequencies"),
+        #    xlim = c(0, nspec+1), ylim = c(0, nsite+1),
+         #   frame = TRUE, xlab = "Species", ylab = "Sites")
       
       # (5) Sites where a species was missed
-      image(x = 1:nspec, y = 1:nsite, z = t(missed.sites), col = mapPalette1(2),
-            main = paste("Matrix of missed presences\n (obs. N species =", Ntotal.obs,")"),
-            frame = TRUE, xlim = c(0, nspec+1), ylim = c(0, nsite+1), xlab = "Species",
-            ylab = "Sites")
+      #image(x = 1:nspec, y = 1:nsite, z = t(missed.sites), col = mapPalette1(2),
+       #     main = paste("Matrix of missed presences\n (obs. N species =", Ntotal.obs,")"),
+        #    frame = TRUE, xlim = c(0, nspec+1), ylim = c(0, nsite+1), xlab = "Species",
+         #   ylab = "Sites")
       
       # (6) True and observed distribution of site-specific species richness
       # plot(table(S.true), col = "red", xlab = "Number of species per site",
       # xlim = c(0, max(S.true)), ylab = "Frequency",
       # main = "True (red) vs. observed (blue) \n number of species per site")
       # points(table(S.obs+(nspec/100)), col = "blue")
-      histCount(S.obs, S.true,  xlab = "Number of species per site",
-                main = "True (red) vs. observed (blue) \n number of species per site")
+      #histCount(S.obs, S.true,  xlab = "Number of species per site",
+       #         main = "True (red) vs. observed (blue) \n number of species per site")
       # See file "histCount_helper.R" for details of this function.
     }
     
