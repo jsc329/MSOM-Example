@@ -1,11 +1,5 @@
 model {
   
-  
-  
-  # Modified version of Tingley et al. 2016 Pyrodiveristy paper
-  
-  
-  
   # Hyper-priors
   
   # Occupancy covariates
