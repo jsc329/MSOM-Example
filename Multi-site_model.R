@@ -1,42 +1,4 @@
-model {
-  
-  
-  
-  # Modified version of Tingley et al. 2016 Pyrodiveristy paper
-  
-  
-  
-  # Hyper-priors
-  
-  # Occupancy covariates
-  
-  for (i in 1:n.statecovs) {
-    
-    mu.b[i] ~ dnorm(0, 0.01)
-    
-    tau.b[i] ~ dgamma(0.1, 0.1)
-    
-  }
-  
-  # Detection covariates
-  
-  for (i in 1:n.detcovs) {
-    
-    mu.a[i] ~ dnorm(0, 0.01)
-    
-    tau.a[i] ~ dgamma(0.1, 0.1)
-    
-  }
-  
-  
- for (i in 1:n.sites){
-   mu.site[i] ~ dnorm(0, 0.01)
-   tau.site[i] ~ dgamma(0.1, 0.1)
- }
-  
-
-  
-  ### Species loop
+ ### Species loop
   
   
   
@@ -77,7 +39,7 @@ model {
       
       for (k in 1:n.visits){
         
-        logit(theta[j,k,i]) <- a[i,1] + a[i,2]*wind[j,k] 
+        logit(theta[j,k,i]) <- a[i,1] + a[i,2]*wind[j,k] + a[i,3]*time[j,k] + a[i,4]*noise[j,k]
         
         mu.p[j,k,i] <- theta[j,k,i]*Z[j,i]
         
