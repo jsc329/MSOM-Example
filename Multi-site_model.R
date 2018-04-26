@@ -53,10 +53,7 @@ model {
       a[i,o] ~ dnorm(mu.a[o], tau.a[o])
       
     }
-    
-    
-    siteeff[i, 1] <- 0
-    
+        
     for (r in 1:n.sites){
       siteeff[i, r] ~ dnorm(mu.site[r], tau.site[r]) 
     }
