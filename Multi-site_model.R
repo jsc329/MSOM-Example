@@ -23,7 +23,7 @@ model {
   }
   
   
- for (i in 1:(n.sites-1){
+ for (i in 1:(n.sites-1)){
    mu.site[i] ~ dnorm(0, 0.01)
    tau.site[i] ~ dgamma(0.1, 0.1)
  }
