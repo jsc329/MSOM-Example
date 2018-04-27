@@ -56,8 +56,8 @@ model {
       # Set the first site to 0 so we can have constrasts
       siteeff[i, 1] <- 0
     
-    for (r in 1:(n.sites-1){
-      siteeff[i, r+1] ~ dnorm(mu.site[r+1], tau.site[r+1]) 
+    for (r in 1:(n.sites-1)){
+      siteeff[i, r+1] ~ dnorm(mu.site[r], tau.site[r]) 
     }
     
     
