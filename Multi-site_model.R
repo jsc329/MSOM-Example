@@ -61,7 +61,7 @@ model {
     
     for (j in 1:n.stations) {
       
-      logit(psi[j,i]) <- b[i,1] + b[i,2]*hab[j] + + siteeff[i, sitenum[j]]
+      logit(psi[j,i]) <- b[i,1] + b[i,2]*hab[j] + siteeff[i, sitenum[j]]
       
       Z[j,i] ~ dbin(psi[j,i], 1)
       
