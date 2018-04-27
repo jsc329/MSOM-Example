@@ -23,7 +23,7 @@ model {
   }
   
   
- for (i in 1:n.sites){
+ for (i in 1:(n.sites-1){
    mu.site[i] ~ dnorm(0, 0.01)
    tau.site[i] ~ dgamma(0.1, 0.1)
  }
@@ -53,9 +53,11 @@ model {
       a[i,o] ~ dnorm(mu.a[o], tau.a[o])
       
     }
-        
-    for (r in 1:n.sites){
-      siteeff[i, r] ~ dnorm(mu.site[r], tau.site[r]) 
+      # Set the first site to 0 so we can have constrasts
+      siteeff[i, 1] <- 0
+    
+    for (r in 1:(n.sites-1){
+      siteeff[i, r+1] ~ dnorm(mu.site[r+1], tau.site[r+1]) 
     }
     
     
