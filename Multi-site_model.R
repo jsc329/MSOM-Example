@@ -61,7 +61,7 @@ model {
     
     for (j in 1:n.stations) {
       
-      logit(psi[j,i]) <- b[i,1] + b[i,2]*cov1[j] + b[i,3]*cov2[j] + siteeff[i, sitenum[j]]
+      logit(psi[j,i]) <- b[i,1] + b[i,2]*hab[j] + + siteeff[i, sitenum[j]]
       
       Z[j,i] ~ dbin(psi[j,i], 1)
       
@@ -70,7 +70,7 @@ model {
       
       for (k in 1:n.visits){
         
-        logit(theta[j,k,i]) <- a[i,1] + a[i,2]*wind[j,k] + a[i,3]*time[j,k] + a[i,4]*noise[j,k]
+        logit(theta[j,k,i]) <- a[i,1] + a[i,2]*wind[j]
         
         mu.p[j,k,i] <- theta[j,k,i]*Z[j,i]
         
