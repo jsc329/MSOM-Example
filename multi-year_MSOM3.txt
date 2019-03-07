@@ -1,0 +1,78 @@
+
+
+model {
+  # Hyper-priors
+  # Occupancy covariates
+  for (l in 1:2) {
+    mu.b[l] ~ dnorm(0, 0.01)
+    tau.b[l] ~ dgamma(0.1, 0.1)
+  }
+
+  # Detection covariates
+  for (m in 1:2) {
+    mu.a[m] ~ dnorm(0, 0.01)
+    tau.a[m] ~ dgamma(0.1, 0.1)
+  }
+
+
+
+  mu_ohv1 ~ dnorm(0, 0.01)
+  tau_ohv1 ~ dgamma(0.1, 0.1)
+
+  mu_ohv2 ~ dnorm(0, 0.01)
+  tau_ohv2 ~ dgamma(0.1, 0.1)
+
+  mu.phi ~ dnorm(0, 0.01)
+  tau.phi ~ dgamma(0.1, 0.1)
+  
+### Species loop
+  
+  for (i in 1:(n.species)) {    
+   
+	ohveff[i, 1] ~ dnorm(mu_ohv1, tau_ohv1)
+	ohveff[i, 2] <- 0
+	
+	b[i, 1] ~ dnorm(mu.b[1] , tau.b[1])
+	b[i, 2] ~ dnorm(mu.b[2] , tau.b[2])
+
+	a[i, 1] ~ dnorm(mu.a[1] , tau.a[1])
+	a[i, 2] ~ dnorm(mu.a[2] , tau.a[2])
+
+	phi[i] ~ dnorm(mu.phi , tau.phi)
+
+
+
+    # State model for time = 1
+    
+    for (j in 1:n.sites) {
+
+       logit(psi[j,1,i]) <- b[i,1] + b[i,2] * habitat[j,1] + ohveff[i, ohvind[j]]
+      
+      Z[j,1,i] ~ dbin(psi[j,1,i], 1)
+      
+      # Data model for time = 1
+      
+      for (k in 1:n.visits){
+        logit(theta[j,k,1,i]) <- a[i,1] + a[i,2] * wind[k, 1]
+        mu.p[j,k,1,i] <- theta[j,k,1,i]*Z[j,1,i]
+        y[j,k,1,i] ~ dbin(mu.p[j,k,1,i], 1)
+      }
+      
+      # State model for time > 1
+      
+      for(t in 2:n.years){
+        logit(psi[j,t,i]) <-  b[i,1] + b[i,2] * habitat[j,t] + ohveff[i, ohvind[j]] + phi[i]*(Z[j,t-1,i])
+        Z[j,t,i] ~ dbin(psi[j,t,i],1)
+        
+        # Data model for time > 1
+        
+        for (k in 1:n.visits){
+          logit(theta[j,k,t,i]) <- a[i,1] + a[i,2] * wind[k, t]
+          mu.p[j,k,t,i] <- theta[j,k,t,i]*Z[j,t,i]
+          y[j,k,t,i] ~ dbin(mu.p[j,k,t,i], 1)
+          
+        }
+      }
+    }
+  }
+}
