@@ -19,9 +19,6 @@ model {
   mu_ohv1 ~ dnorm(0, 0.01)
   tau_ohv1 ~ dgamma(0.1, 0.1)
 
-  mu_ohv2 ~ dnorm(0, 0.01)
-  tau_ohv2 ~ dgamma(0.1, 0.1)
-
   mu.phi ~ dnorm(0, 0.01)
   tau.phi ~ dgamma(0.1, 0.1)
   
